@@ -76,6 +76,7 @@ WSGI_APPLICATION = 'budgetlesh.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# thanks to environ I'm secure login and pass of database
 env = environ.Env()
 environ.Env.read_env()
 
@@ -121,8 +122,14 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
+USE_L10N = False
+
+DATE_FORMAT = 'd-m-Y'
+DATE_INPUT_FORMATS = '%d-%m-%Y'
+DATETIME_FORMAT = 'd-m-Y H:i'
+DATETIME_INPUT_FORMATS = '%d-%m-%Y %H:%i'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
