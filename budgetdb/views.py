@@ -5,6 +5,11 @@ from budgetdb.models import Budgettable
 import time
 
 
+
+def startpage_view(request):
+    return render(request, 'base.html')
+
+
 def importcsv_view():
     with open('budgetlesh.csv', 'r', newline='') as csvfile:
         past_data = csv.reader(csvfile, delimiter=',')

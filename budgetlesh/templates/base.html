@@ -1,1 +1,36 @@
-{% block page_content %}{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BudgetLesh</title>
+</head>
+<body>
+    <div>
+        <p>Привет! На что потратились в этот раз?;)</p>
+    </div>
+    <div>
+        <p>
+            Текущие расходы в {% now 'F' %}
+        </p>
+    </div>
+    <form action="" method="get">
+        <input type="date" name="expenses_date" value="{% now 'Y-m-d' %}"><br>
+        <input type="number" name="expenses_sum" value="">
+        <select name="expenses_currency" size="1">
+            <option>RUB</option>
+            <option>GEL</option>
+            <option>USD</option>
+            <option>EUR</option>
+        </select><br>
+        <input type="text" name="expenses_description"><br>
+        <select name="expenses_section">
+            <option>еда/быт</option>
+            <option>проезд</option>
+        </select><br>
+        <input type="submit" name="expenses_send" value="Save">
+    </form>
+</body>
+</html>

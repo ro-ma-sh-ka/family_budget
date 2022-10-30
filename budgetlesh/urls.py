@@ -16,10 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from budgetdb.views import create_view
+from budgetdb.views import create_view, startpage_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', import_csv, name='csv_read')
-    path('create/', create_view, name='create_view')
+    path('', startpage_view, name='startpage_view'),
+    path('create/', create_view, name='create_view'),
 ]
