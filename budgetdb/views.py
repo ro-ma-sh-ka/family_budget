@@ -1,9 +1,11 @@
-from django.shortcuts import render
+import datetime
+
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib import messages
 import csv
 from budgetdb.models import Budgettable
 import time
-
 
 
 def startpage_view(request):
@@ -25,11 +27,29 @@ def importcsv_view():
     return HttpResponse(Budgettable.objects.all())
 
 
+def add_expenses_view(request):
+    new_expenses = Budgettable()
+    new_expenses.created_on = datetime.datetime.now()
+    new_expenses.updated_on = datetime.datetime.now()
+    new_expenses.date = request.GET.get("expenses_date")
+    new_expenses.total = request.GET.get("expenses_sum")
+    new_expenses.currency = request.GET.get("expenses_currency")
+    new_expenses.what_is = request.GET.get("expenses_description")
+    new_expenses.section = request.GET.get("expenses_section")
+    new_expenses.save()
+    messages.success(request, "Done!")
+    return render(request, 'base.html')
+
+
+def show_expenses_view(request):
+    show_expenses = Budgettable.objects.all()
+    return render(request, 'show_expenses.html', {'expenses': show_expenses})
+
 def exportcsv_view():
     pass
 
 
-def create_view(request):
+def create_user_view(request):
     return render(request, 'register.html')
 
 

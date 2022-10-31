@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Expenses</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>created_on</td>
+            <td>updated_on</td>
+            <td>date</td>
+            <td>total</td>
+            <td>currency</td>
+            <td>what_is</td>
+            <td>section</td>
+        </tr>
+        <tr>
+            {% for expense in expenses %}
+                <td>{{ expense.created_on }}</td>
+                <td>{{ expense.updated_on }}</td>
+                <td>{{ expense.date }}</td>
+                <td>{{ expense.total }}</td>
+                <td>{{ expense.currency }}</td>
+                <td>{{ expense.what_is }}</td>
+                <td>{{ expense.section }}</td>
+            {% endfor %}
+        </tr>
+    </table>
+</body>
+</html>

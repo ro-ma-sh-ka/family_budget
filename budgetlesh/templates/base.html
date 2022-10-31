@@ -16,7 +16,7 @@
             Текущие расходы в {% now 'F' %}
         </p>
     </div>
-    <form action="" method="get">
+    <form action="{% url 'add_expenses_view' %}" method="get">
         <input type="date" name="expenses_date" value="{% now 'Y-m-d' %}"><br>
         <input type="number" name="expenses_sum" value="">
         <select name="expenses_currency" size="1">
@@ -24,8 +24,8 @@
             <option>GEL</option>
             <option>USD</option>
             <option>EUR</option>
-        </select><br>
-        <input type="text" name="expenses_description"><br>
+        </select>
+        <input type="text" name="expenses_description">
         <select name="expenses_section">
             <option>еда/быт</option>
             <option>проезд</option>

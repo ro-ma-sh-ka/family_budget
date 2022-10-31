@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from budgetdb.views import create_view, startpage_view
+from budgetdb.views import startpage_view, add_expenses_view, show_expenses_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', startpage_view, name='startpage_view'),
-    path('create/', create_view, name='create_view'),
+    path('add_expenses/', add_expenses_view, name='add_expenses_view'),
+    path('show_expenses/', show_expenses_view, name='show_expenses_view')
 ]
