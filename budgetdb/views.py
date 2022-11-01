@@ -1,6 +1,6 @@
 import datetime
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib import messages
 import csv
@@ -46,12 +46,4 @@ def show_expenses_view(request):
     return render(request, 'show_expenses.html', {'expenses': show_expenses})
 
 def exportcsv_view():
-    pass
-
-
-def create_user_view(request):
-    return render(request, 'register.html')
-
-
-def checkin_view():
     pass

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth import views
-from django.urls import path
+from django.urls import path, include
 
 from budgetdb.views import startpage_view, add_expenses_view, show_expenses_view
 
@@ -23,5 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', startpage_view, name='startpage_view'),
     path('add_expenses/', add_expenses_view, name='add_expenses_view'),
-    path('show_expenses/', show_expenses_view, name='show_expenses_view')
+    path('show_expenses/', show_expenses_view, name='show_expenses_view'),
+    path('accounts/', include('django.contrib.auth.urls'))
 ]
