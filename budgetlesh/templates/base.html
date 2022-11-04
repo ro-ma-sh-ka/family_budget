@@ -1,61 +1,40 @@
-<!--<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>BudgetLesh</title>
 </head>
 <body>
-    <div>
-        <p>Привет! На что потратились в этот раз?;)</p>
-    </div>
-    <div>
-        <p>
-            Текущие расходы в {% now 'F' %}
-        </p>
-    </div>
-    <form action="{% url 'add_expenses_view' %}" method="get">
-        <input type="date" name="expenses_date" value="{% now 'Y-m-d' %}"><br>
-        <input type="number" name="expenses_sum" value="">
-        <select name="expenses_currency" size="1">
-            <option>RUB</option>
-            <option>GEL</option>
-            <option>USD</option>
-            <option>EUR</option>
-        </select>
-        <input type="text" name="expenses_description">
-        <select name="expenses_section">
-            <option>еда/быт</option>
-            <option>проезд</option>
-        </select><br>
-        <input type="submit" name="expenses_send" value="Save">
-    </form>
-</body>
-</html>-->
-<!doctype  html>
-<html  lang="en">
-<head>
-<link  rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"  crossorigin="anonymous">
-<title>Django Authentication Example</title>
-</head>
-<body>
-  <div  class="container">
-    <div  class="row justify-content-center">
-      <div  class="col-4">
-      <h1  class="text-center">Django Authentication Example</h1>
         {% if user.is_authenticated %}
           <p>Hi {{ user.username }}!</p>
+          <p>Привет! На что потратились в этот раз?;)</p>
+          <a href="{% url 'logout' %}">Logout</a>
+          <div>
+              <p>Текущие расходы в {% now 'F' %}</p>
+          </div>
+          <div>
+              <form action="{% url 'add_expenses_view' %}" method="get">
+                <input type="date" name="expenses_date" value="{% now 'Y-m-d' %}"><br>
+                <input type="number" name="expenses_sum" value="">
+                <select name="expenses_currency" size="1">
+                    <option>RUB</option>
+                    <option>GEL</option>
+                    <option>USD</option>
+                    <option>EUR</option>
+                </select>
+                <input type="text" name="expenses_description">
+                <select name="expenses_section">
+                    <option>еда/быт</option>
+                    <option>проезд</option>
+                </select><br>
+                <input type="submit" name="expenses_send" value="Save">
+              </form>
+          </div>
         {% else %}
           <p>You are not logged in.</p>
-        <a href="{% url 'accounts/login' %}">Log In</a>
-      {% endif %}
-      {% block main %}
-
-      {% endblock %}
-      </div>
-    </div>
-  </div>
+          <p>Please, login: <a href="{% url 'login' %}">Log In</a></p>
+        {% endif %}
+        {% block main %}
+        {% endblock %}
 </body>
 </html>

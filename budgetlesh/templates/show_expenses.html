@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Expenses</title>
@@ -8,7 +8,9 @@
     <table>
         <tr>
             <td>created_on</td>
+            <td>creator</td>
             <td>updated_on</td>
+            <td>updator</td>
             <td>date</td>
             <td>total</td>
             <td>currency</td>
@@ -18,7 +20,9 @@
         <tr>
             {% for expense in expenses %}
                 <td>{{ expense.created_on }}</td>
+                <td>{{ expense.creator }}</td>
                 <td>{{ expense.updated_on }}</td>
+                <td>{{ expense.updater }}</td>
                 <td>{{ expense.date }}</td>
                 <td>{{ expense.total }}</td>
                 <td>{{ expense.currency }}</td>

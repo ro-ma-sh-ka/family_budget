@@ -127,10 +127,10 @@ USE_TZ = False
 
 USE_L10N = False
 
-DATE_FORMAT = 'd-m-Y'
-DATE_INPUT_FORMATS = '%d-%m-%Y'
-DATETIME_FORMAT = 'd-m-Y H:i'
-DATETIME_INPUT_FORMATS = '%d-%m-%Y %H:%i'
+# DATE_FORMAT = 'd-m-Y'
+# DATE_INPUT_FORMATS = '%d-%m-%Y'
+# DATETIME_FORMAT = 'd-m-Y H:i'
+# DATETIME_INPUT_FORMATS = '%d-%m-%Y %H:%i'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -143,3 +143,4 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
