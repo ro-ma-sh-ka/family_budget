@@ -13,23 +13,31 @@
               <p>Текущие расходы в {% now 'F' %}</p>
           </div>
           <div>
-              <form action="{% url 'add_expenses_view' %}" method="get">
-                <input type="date" name="expenses_date" value="{% now 'Y-m-d' %}"><br>
-                <input type="number" name="expenses_sum" value="">
-                <select name="expenses_currency" size="1">
-                    <option>RUB</option>
-                    <option>GEL</option>
-                    <option>USD</option>
-                    <option>EUR</option>
-                </select>
-                <input type="text" name="expenses_description">
-                <select name="expenses_section">
-                    <option>еда/быт</option>
-                    <option>проезд</option>
-                </select><br>
-                <input type="submit" name="expenses_send" value="Save">
+              <form action="{% url 'add_new_expense_view' %}" method="get">
+                  <input type="date" name="expenses_date" value="{% now 'Y-m-d' %}"><br>
+                  <input type="number" name="expenses_sum" value="">
+                  <select name="expenses_currency" size="1">
+                      <option>RUB</option>
+                      <option>GEL</option>
+                      <option>USD</option>
+                      <option>EUR</option>
+                  </select>
+                  <input type="text" name="expenses_description">
+                  <select name="expenses_section">
+                      <option>еда/быт</option>
+                      <option>проезд</option>
+                  </select><br>
+                  <input type="submit" name="expenses_send" value="Save">
               </form>
           </div>
+          <div class="past_expenses">
+              <p>Загрузить прошлые траты из csv файла:</p>
+              <form action="{% url 'add_new_expense_view' %}" method="get">
+                  <input type="file" name="csvfile" value=""><br>
+                  <input type="submit" name="past_expenses_send" value="Send">
+              </form>
+          </div>
+
         {% else %}
           <p>You are not logged in.</p>
           <p>Please, login: <a href="{% url 'login' %}">Log In</a></p>

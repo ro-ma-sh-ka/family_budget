@@ -18,14 +18,16 @@ from django.contrib.auth import views
 from django.urls import path, include
 
 import accounts.views
-from budgetdb.views import startpage_view, add_expenses_view, show_expenses_view
+from budgetdb.views import startpage_view, add_past_expenses_view, show_expenses_view, add_new_expense_view
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', startpage_view, name='startpage_view'),
-    path('add_expenses/', add_expenses_view, name='add_expenses_view'),
+    path('add_expenses/', add_new_expense_view, name='add_new_expense_view'),
     path('show_expenses/', show_expenses_view, name='show_expenses_view'),
-    #path('accounts/', include('django.contrib.auth.urls')),
+    path('import/', add_past_expenses_view, name='add_past_expenses_view'),
+    # path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls')),
     path('accounts/new_account/', accounts.views.new_account_view, name='new_account'),
 ]

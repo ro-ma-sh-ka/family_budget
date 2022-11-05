@@ -17,8 +17,8 @@
             <td>what_is</td>
             <td>section</td>
         </tr>
-        <tr>
-            {% for expense in expenses %}
+        {% for expense in expenses %}
+            <tr>
                 <td>{{ expense.created_on }}</td>
                 <td>{{ expense.creator }}</td>
                 <td>{{ expense.updated_on }}</td>
@@ -28,8 +28,8 @@
                 <td>{{ expense.currency }}</td>
                 <td>{{ expense.what_is }}</td>
                 <td>{{ expense.section }}</td>
-            {% endfor %}
-        </tr>
+            </tr>
+        {% endfor %}
     </table>
 </body>
 </html>
