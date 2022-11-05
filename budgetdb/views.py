@@ -2,6 +2,7 @@ import datetime
 import csv
 import traceback
 
+from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib import messages
@@ -60,7 +61,19 @@ def add_new_expense_view(request):
 
 def show_expenses_view(request):
     show_expenses = Budgettable.objects.all()
-    return render(request, 'show_expenses.html', {'expenses': show_expenses})
+
+    page_number = request.GET.get('page', 1)
+    rows_qty = int(request.GET.get('rows', 10))
+    paginator = Paginator(show_expenses, rows_qty)
+    page_obj = paginator.get_page(page_number)
+    total_rows = paginator.num_pages * rows_qty
+    context = {
+        'total_rows': total_rows,
+        'expenses': page_obj,
+        'num_pages': paginator.num_pages,
+        'page_obj': page_obj
+    }
+    return render(request, 'show_expenses.html', context)
 
 
 def exportcsv_view():

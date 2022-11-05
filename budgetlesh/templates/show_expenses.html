@@ -5,6 +5,7 @@
     <title>Expenses</title>
 </head>
 <body>
+    <a href="http://127.0.0.1:8000/">Home</a>
     <table>
         <tr>
             <td>created_on</td>
@@ -31,5 +32,19 @@
             </tr>
         {% endfor %}
     </table>
+
+    {% if page_obj.has_previous %}
+        <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+    {% endif %}
+    <p>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</p>
+    {% if page_obj.has_next %}
+        <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">Следующая</a>
+    {% endif %}
+
+    <p>Выводить по: <a href="http://127.0.0.1:8000/show_expenses/?rows=10">10</a> |
+        <a href="http://127.0.0.1:8000/show_expenses/?rows=20">20</a> |
+        <a href="http://127.0.0.1:8000/show_expenses/?rows=50">50</a> |
+        <a href="http://127.0.0.1:8000/show_expenses/?rows={{ total_rows }}">Все</a></p>
+    <p>Всего страниц: {{ num_pages }}</p>
 </body>
 </html>
