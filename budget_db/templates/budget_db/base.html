@@ -5,7 +5,18 @@
     <title>BudgetLesh</title>
 </head>
 <body>
-    <p>Текущие расходы в сент</p>
-    <p>Привет! На что потратились в этот раз?;)</p>
+    {% block mainmenu %}
+        <p>Привет, </p>
+        <p>Текущие расходы в сент
+            {% for expense in expenses %}
+                {{ expense.total }}
+            {% endfor %}
+        </p>
+        <p>Выход</p>
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+
 </body>
 </html>

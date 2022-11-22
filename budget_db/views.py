@@ -14,7 +14,13 @@ from budget_db.models import Budget
 
 
 def start_page_view(request):
-    return render(request, 'budget_db/base.html')
+    expenses = Budget.objects.all()
+    print(type(expenses))
+    return render(request, 'budget_db/base.html', {'expenses': expenses})
+
+
+def add_expenses_view(request):
+    return render(request, 'budget_db/add_expenses.html')
 
 
 def add_past_expenses_view(request):
