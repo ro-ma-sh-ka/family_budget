@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetdb', '0003_budgettable_currency'),
+        ('budget_db', '0003_budgettable_currency'),
     ]
 
     operations = [

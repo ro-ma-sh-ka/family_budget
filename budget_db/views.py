@@ -8,13 +8,13 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
 
-from budgetdb.apps import DateConverter
-from budgetdb.db_access import add_expenses
-from budgetdb.models import Budgettable
+from budget_db.apps import DateConverter
+from budget_db.db_access import add_expenses
+from budget_db.models import Budget
 
 
-def startpage_view(request):
-    return render(request, 'base.html')
+def start_page_view(request):
+    return render(request, 'budget_db/base.html')
 
 
 def add_past_expenses_view(request):
@@ -40,8 +40,8 @@ def add_past_expenses_view(request):
                          )
         except Exception:
             context = f'try again {row[0]} {traceback.print_exc()}'
-            return render(request, 'message.html', {'filename': context})
-    return render(request, 'message.html', {'filename': 'done'})
+            return render(request, 'budgetlesh/message.html', {'filename': context})
+    return render(request, 'budgetlesh/message.html', {'filename': 'done'})
 
 
 def add_new_expense_view(request):
@@ -56,11 +56,11 @@ def add_new_expense_view(request):
                  request.GET.get("expenses_section")
                  )
     messages.success(request, "Done!")
-    return render(request, 'base.html')
+    return render(request, 'budgetlesh/base.html')
 
 
 def show_expenses_view(request):
-    show_expenses = Budgettable.objects.all()
+    show_expenses = Budget.objects.all()
 
     page_number = request.GET.get('page', 1)
     rows_qty = int(request.GET.get('rows', 10))
@@ -73,7 +73,7 @@ def show_expenses_view(request):
         'num_pages': paginator.num_pages,
         'page_obj': page_obj
     }
-    return render(request, 'show_expenses.html', context)
+    return render(request, 'budgetlesh/show_expenses.html', context)
 
 
 def exportcsv_view():

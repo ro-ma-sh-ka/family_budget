@@ -2,9 +2,9 @@ from datetime import datetime
 from django.apps import AppConfig
 
 
-class BudgetdbConfig(AppConfig):
+class Budget_dbConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'budgetdb'
+    name = 'budget_db'
 
 
 class DateConverter:

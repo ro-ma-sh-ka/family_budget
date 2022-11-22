@@ -14,20 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.contrib.auth import views
 from django.urls import path, include
-
-import accounts.views
-from budgetdb.views import startpage_view, add_past_expenses_view, show_expenses_view, add_new_expense_view
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', startpage_view, name='startpage_view'),
-    path('add_expenses/', add_new_expense_view, name='add_new_expense_view'),
-    path('show_expenses/', show_expenses_view, name='show_expenses_view'),
-    path('import/', add_past_expenses_view, name='add_past_expenses_view'),
-    # path('accounts/', include('django.contrib.auth.urls')),
+
+    # to make budget_db and accounts apps independence use include and create urls.py inside app directories
+    path('', include('budget_db.urls')),
     path('accounts/', include('accounts.urls')),
-    path('accounts/new_account/', accounts.views.new_account_view, name='new_account'),
 ]

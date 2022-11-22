@@ -1,10 +1,10 @@
-from budgetdb.models import Budgettable
+from budget_db.models import Budget
 import traceback
 
 
 def add_expenses(created_on, creator, updated_on, updater, date, total, currency, what_is, section):
     try:
-        new_expenses = Budgettable()
+        new_expenses = Budget()
         new_expenses.created_on = created_on
         new_expenses.creator = creator
         new_expenses.updated_on = updated_on
