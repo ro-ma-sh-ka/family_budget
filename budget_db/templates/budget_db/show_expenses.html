@@ -3,17 +3,17 @@
     <a href="{% url 'home' %}">Home</a>
     <table>
         <tr>
-            <td>created_on</td>
+            <td>created</td>
             <td>creator</td>
-            <td>updated_on</td>
+            <td>updated</td>
             <td>updator</td>
             <td>date</td>
             <td>total</td>
             <td>currency</td>
-            <td>what_is</td>
+            <td>what is</td>
             <td>section</td>
             <td>delete</td>
-            <td>update</td>
+            <td>edit</td>
         </tr>
         {% for expense in expenses %}
             <tr>
@@ -27,22 +27,22 @@
                 <td>{{ expense.what_is }}</td>
                 <td>{{ expense.section }}</td>
                 <td><a href="{% url 'delete_expense' expense.id %}">delete</a></td>
-                <td><a href="{% url 'update_expense' expense.id %}">update</a></td>
+                <td><a href="{% url 'update_expense' expense.id %}">edit</a></td>
             </tr>
         {% endfor %}
     </table>
 
     {% if page_obj.has_previous %}
-        <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+        <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">Previous</a>
     {% endif %}
     <p>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</p>
     {% if page_obj.has_next %}
-        <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">Следующая</a>
+        <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">Next</a>
     {% endif %}
 
     <p>Выводить по: <a href="http://127.0.0.1:8000/show_expenses/?rows=10">10</a> |
         <a href="http://127.0.0.1:8000/show_expenses/?rows=20">20</a> |
         <a href="http://127.0.0.1:8000/show_expenses/?rows=50">50</a> |
-        <a href="http://127.0.0.1:8000/show_expenses/?rows={{ total_rows }}">Все</a></p>
-    <p>Всего страниц: {{ num_pages }}</p>
+        <a href="http://127.0.0.1:8000/show_expenses/?rows={{ total_rows }}">All</a></p>
+    <p>Pages: {{ num_pages }}</p>
 {% endblock %}

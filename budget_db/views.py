@@ -29,12 +29,12 @@ def add_expenses_view(request):
 
 
 def delete_expense_view(request, pk):
-    expense = Budget.objects.filter(pk=pk)
+    expense = Budget.objects.get(id=pk)
     return render(request, 'budget_db/delete_expense.html', {'expense': expense})
 
 
 def update_expense_view(request, pk):
-    expense = Budget.objects.filter(pk=pk)
+    expense = Budget.objects.get(id=pk)
     return render(request, 'budget_db/update_expense.html', {'expense': expense})
 
 

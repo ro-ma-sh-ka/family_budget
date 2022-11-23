@@ -1,4 +1,20 @@
 {% extends 'budget_db/base.html' %}
 {% block content %}
     <p>{{ expense }}</p>
+    <form action="" method="post">
+        <input type="date" name="expense_date" value="{{ expense.date }}"><br>
+        <input type="number" name="expense_sum" value="{{ expense.total }}">
+        <select name="expenses_currency" size="1" value="{{ expense.currency }}">
+            <option>RUB</option>
+            <option>GEL</option>
+            <option>USD</option>
+            <option>EUR</option>
+        </select>
+        <input type="text" name="expense_description" value="{{ expense.what_is }}">
+        <select name="expense_section" value="{{ expense.section }}">
+            <option>еда/быт</option>
+            <option>проезд</option>
+        </select><br>
+        <input type="submit" name="expense_send" value="Save">
+    </form>
 {% endblock %}
