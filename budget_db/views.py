@@ -3,13 +3,13 @@ import csv
 import traceback
 
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
 
 from budget_db.apps import DateConverter
-from budget_db.db_access import add_expenses
+from budget_db.db_access import add_expense
 from budget_db.models import Budget
 
 
@@ -33,6 +33,29 @@ def delete_expense_view(request, pk):
     return render(request, 'budget_db/delete_expense.html', {'expense': expense})
 
 
+def delete_view(request):
+    expense = Budget()
+    expense.pk = request.POST.get('expense_pk')
+    expense_to_delete = Budget.objects.get(id=expense.pk)
+    expense_to_delete.delete()
+    messages.success(request, 'Expense has deleted')
+    return redirect('/')
+
+
+def update_view(request):
+    # updated_on = DateConverter().to_db_format(str(request.GET.get('expense_date')))
+    expense_to_update = Budget.objects.get(id=request.GET.get('expense_pk'))
+    expense_to_update.updated_on = datetime.datetime.now()
+    # expense_to_update.date = updated_on,
+    expense_to_update.total = request.GET.get('expense_sum')
+    expense_to_update.currency = request.GET.get('expenses_currency')
+    expense_to_update.what_is = request.GET.get('expense_description')
+    expense_to_update.section = request.GET.get('expense_section')
+    expense_to_update.save()
+    messages.success(request, 'Expense has edited')
+    return redirect('/')
+
+
 def update_expense_view(request, pk):
     expense = Budget.objects.get(id=pk)
     return render(request, 'budget_db/update_expense.html', {'expense': expense})
@@ -49,7 +72,7 @@ def import_past_expenses_view(request):
     for row in past_expenses:
         try:
             row[0] = DateConverter().to_db_format(str(row[0]))
-            add_expenses(datetime.datetime.now(),
+            add_expense(datetime.datetime.now(),
                          'familyenter',
                          datetime.datetime.now(),
                          'familyenter',
@@ -66,7 +89,7 @@ def import_past_expenses_view(request):
 
 
 def add_new_expense_view(request):
-    add_expenses(datetime.datetime.now(),
+    add_expense(datetime.datetime.now(),
                  User.username,
                  datetime.datetime.now(),
                  User.username,

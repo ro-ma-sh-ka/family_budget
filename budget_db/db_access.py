@@ -2,7 +2,7 @@ from budget_db.models import Budget
 import traceback
 
 
-def add_expenses(created_on, creator, updated_on, updater, date, total, currency, what_is, section):
+def add_expense(created_on, creator, updated_on, updater, date, total, currency, what_is, section):
     try:
         new_expenses = Budget()
         new_expenses.created_on = created_on

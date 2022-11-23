@@ -1,8 +1,9 @@
 {% extends 'budget_db/base.html' %}
 {% block content %}
-    <p>{{ expense }}</p>
-    <form action="" method="post">
-        <input type="date" name="expense_date" value="{{ expense.date }}"><br>
+    <form action="{% url 'update_view' %}" method="get">
+        {% csrf_token %}
+        <input type="hidden" name="expense_pk" value="{{ expense.pk }}">
+        <input type="date" name="expense_date" value="{{ expense.date }}">
         <input type="number" name="expense_sum" value="{{ expense.total }}">
         <select name="expenses_currency" size="1" value="{{ expense.currency }}">
             <option>RUB</option>

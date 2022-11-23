@@ -1,7 +1,9 @@
 {% extends 'budget_db/base.html' %}
 {% block content %}
-    <form action="" method="post">
-        <input type="date" name="expense_date" value="{{ expense.date }}"><br>
+    <form action="{% url 'delete_view' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="expense_pk" value="{{ expense.pk }}">
+        <input type="date" name="expense_date" value="{{ expense.date }}">
         <input type="number" name="expense_sum" value="{{ expense.total }}">
         <select name="expenses_currency" size="1" value="{{ expense.currency }}">
             <option>RUB</option>
@@ -10,7 +12,7 @@
             <option>EUR</option>
         </select>
         <input type="text" name="expense_description" value="{{ expense.what_is }}">
-        <select name="expense_section", value="{{ expense.section }}">
+        <select name="expense_section" value="{{ expense.section }}">
             <option>еда/быт</option>
             <option>проезд</option>
         </select><br>
