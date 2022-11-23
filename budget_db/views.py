@@ -28,6 +28,16 @@ def add_expenses_view(request):
     return render(request, 'budget_db/add_expenses.html')
 
 
+def delete_expense_view(request, pk):
+    expense = Budget.objects.filter(pk=pk)
+    return render(request, 'budget_db/delete_expense.html', {'expense': expense})
+
+
+def update_expense_view(request, pk):
+    expense = Budget.objects.filter(pk=pk)
+    return render(request, 'budget_db/update_expense.html', {'expense': expense})
+
+
 def import_past_expenses_view(request):
     with open('budgetlesh.csv', 'r', newline='') as csvfile:
         past_data = csv.reader(csvfile, delimiter=',')

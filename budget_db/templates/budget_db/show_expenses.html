@@ -12,6 +12,8 @@
             <td>currency</td>
             <td>what_is</td>
             <td>section</td>
+            <td>delete</td>
+            <td>update</td>
         </tr>
         {% for expense in expenses %}
             <tr>
@@ -24,6 +26,8 @@
                 <td>{{ expense.currency }}</td>
                 <td>{{ expense.what_is }}</td>
                 <td>{{ expense.section }}</td>
+                <td><a href="{% url 'delete_expense' expense.id %}">delete</a></td>
+                <td><a href="{% url 'update_expense' expense.id %}">update</a></td>
             </tr>
         {% endfor %}
     </table>

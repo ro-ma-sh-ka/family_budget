@@ -13,6 +13,7 @@
         <p>Текущие расходы в сент {{ expenses }}</p>
         <a href="{% url 'add_expenses' %}">Добавить расходы</a>
         <a href="{% url 'import_past_expenses' %}">Загрузить прошлые расходы</a>
+        <a href="{% url 'show_expenses' %}">Показать расходы</a>
         <a href="#">Выход</a>
     {% endblock %}
 
