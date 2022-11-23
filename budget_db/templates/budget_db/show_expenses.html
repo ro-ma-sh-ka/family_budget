@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Expenses</title>
-</head>
-<body>
-    <a href="http://127.0.0.1:8000/">Home</a>
+{% extends 'budget_db/base.html' %}
+{% block content %}
+    <a href="{% url 'home' %}">Home</a>
     <table>
         <tr>
             <td>created_on</td>
@@ -46,5 +41,4 @@
         <a href="http://127.0.0.1:8000/show_expenses/?rows=50">50</a> |
         <a href="http://127.0.0.1:8000/show_expenses/?rows={{ total_rows }}">Все</a></p>
     <p>Всего страниц: {{ num_pages }}</p>
-</body>
-</html>
+{% endblock %}
