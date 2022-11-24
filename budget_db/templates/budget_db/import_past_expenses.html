@@ -1,0 +1,8 @@
+{% extends 'budget_db/base.html' %}
+{% block content %}
+    <p>import</p>
+    <form action="{% url 'import_view' %}" method="get">
+        {% csrf_token %}
+        <input type="submit" name="expense_send" value="Import?">
+    </form>
+{% endblock %}

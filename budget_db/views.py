@@ -4,7 +4,6 @@ import traceback
 
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
 
@@ -13,27 +12,38 @@ from budget_db.db_access import add_expense
 from budget_db.models import Budget
 
 
-def home_view(request):
+def home_view(request: any) -> render:
+    '''
+    home page
+    Here we create base page with common information.
+    - total/current month - done
+    - total by sections
+    - graphs
+    - invitation to add new_expense
+    '''
     expenses = Budget.objects.all()
     total = 0
-    for expence in expenses:
-        total += expence.total
+    for expense in expenses:
+        total += expense.total
     context = {
         'expenses': total
     }
     return render(request, 'budget_db/base.html', context=context)
 
 
-def add_expenses_view(request):
+def add_expenses_view(request: any) -> render:
+    '''
+
+    '''
     return render(request, 'budget_db/add_expenses.html')
 
 
-def delete_expense_view(request, pk):
+def delete_expense_view(request: any, pk: int) -> render:
     expense = Budget.objects.get(id=pk)
     return render(request, 'budget_db/delete_expense.html', {'expense': expense})
 
 
-def delete_view(request):
+def delete_view(request: any) -> redirect:
     expense = Budget()
     expense.pk = request.POST.get('expense_pk')
     expense_to_delete = Budget.objects.get(id=expense.pk)
@@ -42,7 +52,7 @@ def delete_view(request):
     return redirect('/')
 
 
-def update_view(request):
+def update_view(request: any) -> redirect:
     # updated_on = DateConverter().to_db_format(str(request.GET.get('expense_date')))
     expense_to_update = Budget.objects.get(id=request.GET.get('expense_pk'))
     expense_to_update.updated_on = datetime.datetime.now()
@@ -56,12 +66,16 @@ def update_view(request):
     return redirect('/')
 
 
-def update_expense_view(request, pk):
+def update_expense_view(request: any, pk: int) -> render:
     expense = Budget.objects.get(id=pk)
     return render(request, 'budget_db/update_expense.html', {'expense': expense})
 
 
 def import_past_expenses_view(request):
+    return render(request, 'budget_db/import_past_expenses.html')
+
+
+def import_view(request: any) -> render:
     with open('budgetlesh.csv', 'r', newline='') as csvfile:
         past_data = csv.reader(csvfile, delimiter=',')
         past_expenses = []
@@ -82,13 +96,13 @@ def import_past_expenses_view(request):
                          'RUB',
                          row[3]
                          )
+            messages.success(request, 'Past expenses has imported')
         except Exception:
-            context = f'try again {row[0]} {traceback.print_exc()}'
-            return render(request, 'budgetlesh/message.html', {'filename': context})
-    return render(request, 'budget_db/message.html', {'filename': 'done'})
+            messages.success(request, f'try again {row[0]} {traceback.print_exc()}')
+    return redirect('/')
 
 
-def add_new_expense_view(request):
+def add_new_expense_view(request: any) -> render:
     add_expense(datetime.datetime.now(),
                  User.username,
                  datetime.datetime.now(),
@@ -100,10 +114,10 @@ def add_new_expense_view(request):
                  request.GET.get("expenses_section")
                  )
     messages.success(request, "Done!")
-    return render(request, 'budgetlesh/base.html')
+    return render(request, 'budget_db/base.html')
 
 
-def show_expenses_view(request):
+def show_expenses_view(request: any) -> render:
     show_expenses = Budget.objects.all()
 
     page_number = request.GET.get('page', 1)
@@ -120,5 +134,5 @@ def show_expenses_view(request):
     return render(request, 'budget_db/show_expenses.html', context)
 
 
-def exportcsv_view():
+def export_csv_view():
     pass

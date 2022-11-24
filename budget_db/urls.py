@@ -4,11 +4,12 @@ from .views import *
 urlpatterns = [
     path('', home_view, name='home'),
     path('add_expenses/', add_expenses_view, name='add_expenses'),
-    # path('add_expenses/', add_new_expense_view, name='add_new_expense_view'),
+    path('add_expenses/', add_new_expense_view, name='add_new_expense_view'),
     path('show_expenses/', show_expenses_view, name='show_expenses'),
-    path('delete_expense/<int:pk>', delete_expense_view, name='delete_expense'),
-    path('delete', delete_view, name='delete_view'),
-    path('update_expense/<int:pk>', update_expense_view, name='update_expense'),
-    path('update', update_view, name='update_view'),
-    path('import/', import_past_expenses_view, name='import_past_expenses'),
+    path('delete_expense/<int:pk>/', delete_expense_view, name='delete_expense'),
+    path('delete/', delete_view, name='delete_view'),
+    path('update_expense/<int:pk>/', update_expense_view, name='update_expense'),
+    path('update/', update_view, name='update_view'),
+    path('import_past_expenses/', import_past_expenses_view, name='import_past_expenses'),
+    path('import/', import_view, name='import_view'),
     ]

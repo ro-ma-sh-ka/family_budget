@@ -1,5 +1,4 @@
-from django.db import models, migrations
-from django.urls import reverse
+from django.db import models
 
 
 class Currency(models.Model):
